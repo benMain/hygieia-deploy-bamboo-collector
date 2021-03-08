@@ -114,9 +114,9 @@ public class DefaultBambooDeployClient implements BambooDeployClient {
         data.setComponentVersion(latestResult.getDeploymentVersionName());
         data.setAsOfDate(latestResult.getStartedDate());
 
-        data.setDeployed(latestResult.getDeploymentState().toUpperCase().equals("SUCCESS"));
+        data.setDeployed(latestResult.getDeploymentState().equalsIgnoreCase("SUCCESS"));
         data.setComponentName(artifact.getLabel());
-        data.setOnline(latestResult.getDeploymentState().toUpperCase().equals("SUCCESS"));
+        data.setOnline(latestResult.getDeploymentState().equalsIgnoreCase("SUCCESS"));
         data.setResourceName(latestResult.getDeploymentVersionName());
 
         return data;

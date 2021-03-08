@@ -43,10 +43,10 @@ bamboo.servers[0]=${BAMBOO_URL:-http://bamboo.com}
 bamboo.niceNames[0]=${BAMBOO_NAME:-Bamboo}
 
 #Bamboo Deploy user name (required)
-bamboo.username=${BAMBOO_USERNAME:-bobama}
+bamboo.usernames[0]=${BAMBOO_USERNAME:-bobama}
 
 #Bamboo Deploy password (required)
-bamboo.password=${BAMBOO_PASSWORD:-s3cr3t}
+bamboo.passwords[0]=${BAMBOO_PASSWORD:-s3cr3t}
 
 EOF
 

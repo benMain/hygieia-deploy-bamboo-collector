@@ -84,21 +84,22 @@ public class DefaultBambooDeployClient implements BambooDeployClient {
         List<BambooDeployEnvResCompData> environmentStatuses = new ArrayList<>();
         String urlInventory = "deploy/environment/" + environment.getId() + "/results";
 
-        BambooEnvironmentResults envResults = makeEnvironmentRestCall(application.getInstanceUrl(), urlInventory)
-                .getBody();
+        Optional<BambooEnvironmentResults> envResults = makeEnvironmentRestCall(application.getInstanceUrl(),
+                urlInventory);
+        if (envResults.isPresent()) {
+            Optional<BambooEnvironmentResult> latestOptionalResult = envResults.get().getResults().stream()
+                    .filter(x -> x.getStartedDate() != 0L)
+                    .sorted(Comparator.comparingLong(BambooEnvironmentResult::getStartedDate).reversed()).findFirst();
 
-        Optional<BambooEnvironmentResult> latestOptionalResult = envResults.getResults().stream()
-                .filter(x -> x.getStartedDate() != 0L)
-                .sorted(Comparator.comparingLong(BambooEnvironmentResult::getStartedDate).reversed()).findFirst();
-
-        if (latestOptionalResult.isPresent()) {
-            BambooEnvironmentResult latestResult = latestOptionalResult.get();
-            environmentStatuses.addAll(latestResult.getDeploymentVersion().getItems().stream()
-                    .map(x -> buildBambooDeployEnvResCompData(environment, application, latestResult, x))
-                    .collect(Collectors.toList()));
-        } else {
-            LOGGER.info(String.format("No Deployments for application %s in environment %s",
-                    application.getApplicationName(), environment.getName()));
+            if (latestOptionalResult.isPresent()) {
+                BambooEnvironmentResult latestResult = latestOptionalResult.get();
+                environmentStatuses.addAll(latestResult.getDeploymentVersion().getItems().stream()
+                        .map(x -> buildBambooDeployEnvResCompData(environment, application, latestResult, x))
+                        .collect(Collectors.toList()));
+            } else {
+                LOGGER.info(String.format("No Deployments for application %s in environment %s",
+                        application.getApplicationName(), environment.getName()));
+            }
         }
 
         return environmentStatuses;
@@ -145,18 +146,18 @@ public class DefaultBambooDeployClient implements BambooDeployClient {
     }
     // ////// Helpers
 
-    private ResponseEntity<BambooEnvironmentResults> makeEnvironmentRestCall(String instanceUrl, String endpoint) {
+    private Optional<BambooEnvironmentResults> makeEnvironmentRestCall(String instanceUrl, String endpoint) {
         String url = normalizeUrl(instanceUrl, BAMBOO_API_BASE + endpoint);
-        ResponseEntity<BambooEnvironmentResults> response = null;
         try {
-            response = restOperations.exchange(url, HttpMethod.GET, new HttpEntity<>(createHeaders(instanceUrl)),
-                    BambooEnvironmentResults.class);
+            BambooEnvironmentResults response = restOperations.exchange(url, HttpMethod.GET,
+                    new HttpEntity<>(createHeaders(instanceUrl)), BambooEnvironmentResults.class).getBody();
+            return Optional.of(response);
 
         } catch (RestClientException re) {
             LOGGER.error("Error with REST url: " + url);
             LOGGER.error(re.getMessage());
         }
-        return response;
+        return Optional.empty();
     }
 
     private ResponseEntity<String> makeRestCall(String instanceUrl, String endpoint) {

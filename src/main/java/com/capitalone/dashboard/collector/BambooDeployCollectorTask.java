@@ -51,6 +51,7 @@ public class BambooDeployCollectorTask extends CollectorTask<BambooDeployCollect
     private final ConfigurationRepository configurationRepository;
     private final ComponentRepository dbComponentRepository;
 
+    @SuppressWarnings("squid:S00107")
     @Autowired
     public BambooDeployCollectorTask(TaskScheduler taskScheduler,
             BambooDeployCollectorRepository bambooDeployCollectorRepository,

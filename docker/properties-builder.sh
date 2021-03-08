@@ -36,20 +36,17 @@ dbusername=${HYGIEIA_API_ENV_SPRING_DATA_MONGODB_USERNAME:-dashboarduser}
 dbpassword=${HYGIEIA_API_ENV_SPRING_DATA_MONGODB_PASSWORD:-dbpassword}
 
 #Collector schedule (required)
-udeploy.cron=${UDEPLOY_CRON:-0 0/5 * * * *}
+bamboo.cron=${BAMBOO_CRON:-0 0/15 * * * *}
 
-#UDeploy server (required) - Can provide multiple
-udeploy.servers[0]=${UDEPLOY_URL:-http://udeploy.company.com}
-udeploy.niceNames[0]=${UDEPLOY_NAME:-UDeploy}
+#Bamboo Deploy server (required) - Can provide multiple
+bamboo.servers[0]=${BAMBOO_URL:-http://bamboo.com}
+bamboo.niceNames[0]=${BAMBOO_NAME:-Bamboo}
 
-#UDeploy user name (required)
-udeploy.username=${UDEPLOY_USERNAME:-bobama}
+#Bamboo Deploy user name (required)
+bamboo.username=${BAMBOO_USERNAME:-bobama}
 
-#UDeploy password (required)
-udeploy.password=${UDEPLOY_PASSWORD:-s3cr3t}
-
-# UDeploy token can be used instead of username and password
-udeploy.token=${UDEPLOY_TOKEN:-theudeploytoken}
+#Bamboo Deploy password (required)
+bamboo.password=${BAMBOO_PASSWORD:-s3cr3t}
 
 EOF
 

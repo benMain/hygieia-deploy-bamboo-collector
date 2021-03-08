@@ -20,8 +20,8 @@
     </properties>
     <body>
         <!-- ================================================== -->
-        <section name="Hygieia Udeploy Collector">
-            Welcome to the Hygieia Udeploy Collector
+        <section name="Hygieia Bamboo Deploy Collector">
+            Welcome to the Hygieia Bamboo Deploy Collector
         </section>
         <!-- ================================================== -->
     </body>

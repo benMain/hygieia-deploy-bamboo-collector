@@ -1,6 +1,6 @@
 package com.capitalone.dashboard.model;
 
-public class UDeployApplication extends CollectorItem {
+public class BambooDeployApplication extends CollectorItem {
     protected static final String INSTANCE_URL = "instanceUrl";
     protected static final String APP_NAME = "applicationName";
     protected static final String APP_ID = "applicationId";
@@ -37,7 +37,7 @@ public class UDeployApplication extends CollectorItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UDeployApplication that = (UDeployApplication) o;
+        BambooDeployApplication that = (BambooDeployApplication) o;
         return getApplicationId().equals(that.getApplicationId()) && getInstanceUrl().equals(that.getInstanceUrl());
     }
 

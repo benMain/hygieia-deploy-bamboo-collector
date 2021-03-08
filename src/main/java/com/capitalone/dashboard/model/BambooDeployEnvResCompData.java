@@ -2,7 +2,7 @@ package com.capitalone.dashboard.model;
 
 import org.bson.types.ObjectId;
 
-public class UDeployEnvResCompData {
+public class BambooDeployEnvResCompData {
 	private ObjectId collectorItemId;
 	private String environmentName;
 	private String environmentUrl;

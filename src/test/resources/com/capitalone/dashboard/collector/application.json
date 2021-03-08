@@ -1,25 +1,248 @@
 [
   {
-    "id": "ad88482e-3577-44cd-a6d8-00056062260b",
-    "securityResourceId": "3503bc85-fe5c-4a2e-901f-999b4c3d3bc5",
-    "name": "AA-JPetstore",
-    "description": "JPetstore Sample",
-    "created": 1426794907175,
-    "enforceCompleteSnapshots": false,
-    "active": true,
-    "tags": [],
-    "deleted": false,
-    "user": "Ops Guy"
-  },
-  {
-    "id": "758dd8cd-2c9d-4ade-a5e4-696b171bfffb",
-    "securityResourceId": "a8e548e9-69fc-404b-9c5b-260719a81e59",
-    "name": "AAA",
-    "created": 1445291363432,
-    "enforceCompleteSnapshots": false,
-    "active": true,
-    "tags": [],
-    "deleted": false,
-    "user": "Ops Guy"
-  }
+    "id": 66814034,
+    "oid": "vyvdrx0dy5aq",
+    "key": {
+        "key": "66814034"
+    },
+    "name": "834Aggregator Deployment",
+    "planKey": {
+        "key": "DRIV-D834AG"
+    },
+    "description": "",
+    "environments": [
+        {
+            "id": 66912615,
+            "key": {
+                "key": "66814034-66912615"
+            },
+            "name": "DEV",
+            "description": "",
+            "deploymentProjectId": 66814034,
+            "operations": {
+                "canView": true,
+                "canEdit": true,
+                "canDelete": true,
+                "allowedToExecute": true,
+                "canExecute": true,
+                "allowedToCreateVersion": false,
+                "allowedToSetVersionStatus": false
+            },
+            "position": 0,
+            "configurationState": "TASKED"
+        },
+        {
+            "id": 66912619,
+            "key": {
+                "key": "66814034-66912619"
+            },
+            "name": "UPG",
+            "description": "",
+            "deploymentProjectId": 66814034,
+            "operations": {
+                "canView": true,
+                "canEdit": true,
+                "canDelete": true,
+                "allowedToExecute": true,
+                "canExecute": true,
+                "allowedToCreateVersion": false,
+                "allowedToSetVersionStatus": false
+            },
+            "position": 1,
+            "configurationState": "TASKED"
+        },
+        {
+            "id": 66912618,
+            "key": {
+                "key": "66814034-66912618"
+            },
+            "name": "SIT",
+            "description": "",
+            "deploymentProjectId": 66814034,
+            "operations": {
+                "canView": true,
+                "canEdit": true,
+                "canDelete": true,
+                "allowedToExecute": true,
+                "canExecute": true,
+                "allowedToCreateVersion": false,
+                "allowedToSetVersionStatus": false
+            },
+            "position": 2,
+            "configurationState": "TASKED"
+        },
+        {
+            "id": 66912616,
+            "key": {
+                "key": "66814034-66912616"
+            },
+            "name": "STG",
+            "description": "",
+            "deploymentProjectId": 66814034,
+            "operations": {
+                "canView": true,
+                "canEdit": true,
+                "canDelete": true,
+                "allowedToExecute": true,
+                "canExecute": true,
+                "allowedToCreateVersion": false,
+                "allowedToSetVersionStatus": false
+            },
+            "position": 3,
+            "configurationState": "TASKED"
+        },
+        {
+            "id": 66912617,
+            "key": {
+                "key": "66814034-66912617"
+            },
+            "name": "PROD",
+            "description": "",
+            "deploymentProjectId": 66814034,
+            "operations": {
+                "canView": true,
+                "canEdit": true,
+                "canDelete": true,
+                "allowedToExecute": true,
+                "canExecute": true,
+                "allowedToCreateVersion": false,
+                "allowedToSetVersionStatus": false
+            },
+            "position": 4,
+            "configurationState": "TASKED"
+        }
+    ],
+    "operations": {
+        "canView": true,
+        "canEdit": true,
+        "canDelete": true,
+        "allowedToExecute": false,
+        "canExecute": false,
+        "allowedToCreateVersion": true,
+        "allowedToSetVersionStatus": false
+    }
+},
+{
+    "id": 66814042,
+    "oid": "vyvdrx0dy5ay",
+    "key": {
+        "key": "66814042"
+    },
+    "name": "834Aggregator Pharmacy Deployment",
+    "planKey": {
+        "key": "DRIV-AP834"
+    },
+    "description": "",
+    "environments": [
+        {
+            "id": 66912651,
+            "key": {
+                "key": "66814042-66912651"
+            },
+            "name": "DEV",
+            "description": "",
+            "deploymentProjectId": 66814042,
+            "operations": {
+                "canView": true,
+                "canEdit": true,
+                "canDelete": true,
+                "allowedToExecute": true,
+                "canExecute": true,
+                "allowedToCreateVersion": false,
+                "allowedToSetVersionStatus": false
+            },
+            "position": 0,
+            "configurationState": "TASKED"
+        },
+        {
+            "id": 66912652,
+            "key": {
+                "key": "66814042-66912652"
+            },
+            "name": "UPG",
+            "description": "",
+            "deploymentProjectId": 66814042,
+            "operations": {
+                "canView": true,
+                "canEdit": true,
+                "canDelete": true,
+                "allowedToExecute": true,
+                "canExecute": true,
+                "allowedToCreateVersion": false,
+                "allowedToSetVersionStatus": false
+            },
+            "position": 1,
+            "configurationState": "TASKED"
+        },
+        {
+            "id": 66912653,
+            "key": {
+                "key": "66814042-66912653"
+            },
+            "name": "SIT",
+            "description": "",
+            "deploymentProjectId": 66814042,
+            "operations": {
+                "canView": true,
+                "canEdit": true,
+                "canDelete": true,
+                "allowedToExecute": true,
+                "canExecute": true,
+                "allowedToCreateVersion": false,
+                "allowedToSetVersionStatus": false
+            },
+            "position": 2,
+            "configurationState": "TASKED"
+        },
+        {
+            "id": 66912654,
+            "key": {
+                "key": "66814042-66912654"
+            },
+            "name": "STG",
+            "description": "",
+            "deploymentProjectId": 66814042,
+            "operations": {
+                "canView": true,
+                "canEdit": true,
+                "canDelete": true,
+                "allowedToExecute": true,
+                "canExecute": true,
+                "allowedToCreateVersion": false,
+                "allowedToSetVersionStatus": false
+            },
+            "position": 3,
+            "configurationState": "TASKED"
+        },
+        {
+            "id": 66912655,
+            "key": {
+                "key": "66814042-66912655"
+            },
+            "name": "PROD",
+            "description": "",
+            "deploymentProjectId": 66814042,
+            "operations": {
+                "canView": true,
+                "canEdit": true,
+                "canDelete": true,
+                "allowedToExecute": true,
+                "canExecute": true,
+                "allowedToCreateVersion": false,
+                "allowedToSetVersionStatus": false
+            },
+            "position": 4,
+            "configurationState": "TASKED"
+        }
+    ],
+    "operations": {
+        "canView": true,
+        "canEdit": true,
+        "canDelete": true,
+        "allowedToExecute": false,
+        "canExecute": false,
+        "allowedToCreateVersion": true,
+        "allowedToSetVersionStatus": false
+    }
+}
 ]

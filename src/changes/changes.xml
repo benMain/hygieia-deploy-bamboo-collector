@@ -32,7 +32,7 @@ The <action> type attribute can be add,update,fix,remove.
 
 <document>
     <properties>
-        <title>Hygieia udeploy Collector Changes</title>
+        <title>Hygieia Bamboo Deploy Collector Changes</title>
     </properties>
     <body>
 

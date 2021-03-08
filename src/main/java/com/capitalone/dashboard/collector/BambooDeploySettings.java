@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Bean to hold settings specific to the UDeploy collector.
+ * Bean to hold settings specific to the Bamboo Deploy collector.
  */
 @Component
-@ConfigurationProperties(prefix = "udeploy")
-public class UDeploySettings {
+@ConfigurationProperties(prefix = "bamboo")
+public class BambooDeploySettings {
     private String cron;
-    private String token;
     private List<String> usernames = new ArrayList<>();
     private List<String> passwords = new ArrayList<>();
     private List<String> servers = new ArrayList<>();
@@ -25,14 +24,6 @@ public class UDeploySettings {
 
     public void setCron(String cron) {
         this.cron = cron;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public List<String> getUsernames() {
@@ -58,12 +49,12 @@ public class UDeploySettings {
     public void setServers(List<String> servers) {
         this.servers = servers;
     }
-    
+
     public List<String> getNiceNames() {
-    	return niceNames;
+        return niceNames;
     }
-    
+
     public void setNiceNames(List<String> niceNames) {
-    	this.niceNames = niceNames;
+        this.niceNames = niceNames;
     }
 }

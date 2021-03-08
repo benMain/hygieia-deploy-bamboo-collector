@@ -1,7 +1,7 @@
 package com.capitalone.dashboard.model;
 
 /**
- * Represents a UDeploy environment by ID and name.
+ * Represents a Bamboo environment by ID and name.
  */
 public class Environment {
     private String id;

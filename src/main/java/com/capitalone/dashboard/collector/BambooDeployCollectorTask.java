@@ -178,8 +178,8 @@ public class BambooDeployCollectorTask extends CollectorTask<BambooDeployCollect
 
             component.setEnvironmentName(environment.getName());
             component.setAsOfDate(data.getAsOfDate());
-            String environmentURL = StringUtils.removeEnd(application.getInstanceUrl(), "/") + "/#environment/"
-                    + environment.getId();
+            String environmentURL = StringUtils.removeEnd(application.getInstanceUrl(), "/")
+                    + "/deploy/viewEnvironment.action?id=" + environment.getId();
             component.setEnvironmentUrl(environmentURL);
 
             returnList.add(component);

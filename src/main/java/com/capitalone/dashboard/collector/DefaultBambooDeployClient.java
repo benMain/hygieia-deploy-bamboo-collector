@@ -24,8 +24,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestOperations;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -88,7 +88,8 @@ public class DefaultBambooDeployClient implements BambooDeployClient {
                 .getBody();
 
         Optional<BambooEnvironmentResult> latestOptionalResult = envResults.getResults().stream()
-                .sorted((a, b) -> (int) (a.getStartedDate() - b.getStartedDate())).findFirst();
+                .filter(x -> x.getStartedDate() != 0L)
+                .sorted(Comparator.comparingLong(BambooEnvironmentResult::getStartedDate).reversed()).findFirst();
 
         if (latestOptionalResult.isPresent()) {
             BambooEnvironmentResult latestResult = latestOptionalResult.get();
@@ -182,11 +183,12 @@ public class DefaultBambooDeployClient implements BambooDeployClient {
         String authHeader = null;
         int i = bambooDeploySettings.getServers().indexOf(instanceUrl);
         String auth = bambooDeploySettings.getUsernames().get(i) + ":" + bambooDeploySettings.getPasswords().get(i);
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
+        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes());
         authHeader = "Basic " + new String(encodedAuth);
-
+        LOGGER.info(String.format("Auth encoded: %s", authHeader));
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", authHeader);
+        headers.set("Accept", "application/json");
         return headers;
     }
 

@@ -10,6 +10,8 @@ import com.capitalone.dashboard.repository.EnvironmentComponentRepository;
 import com.capitalone.dashboard.repository.EnvironmentStatusRepository;
 import com.capitalone.dashboard.model.BambooDeployApplication;
 import com.capitalone.dashboard.model.BambooDeployCollector;
+import com.capitalone.dashboard.model.CollectorItem;
+import com.capitalone.dashboard.model.CollectorType;
 import com.capitalone.dashboard.model.Component;
 import com.capitalone.dashboard.model.Configuration;
 
@@ -68,6 +70,7 @@ public class BambooDeployCollectorTaskTest {
     private static String APP_ONE_ID = "123";
     private static String APP_TWO_ID = "456";
     private static ObjectId COLLECTOR_ID = new ObjectId();
+    private static ObjectId APP_ONE_OBJECT_ID = new ObjectId();
 
     @Before
     public void init() {
@@ -111,9 +114,9 @@ public class BambooDeployCollectorTaskTest {
 
     @Test
     public void testCollect() {
-        when(dbComponentRepository.findAll()).thenReturn(new ArrayList<Component>());
+        when(dbComponentRepository.findAll()).thenReturn(Arrays.asList(getDashboardComponent()));
         when(bambooDeployApplicationRepository.findByCollectorIdIn(Matchers.anyObject()))
-                .thenReturn(new ArrayList<BambooDeployApplication>());
+                .thenReturn(Arrays.asList(getExistingApp()));
         when(bambooDeployClient.getApplications(Matchers.any(String.class))).thenReturn(getAllApplications());
         when(bambooDeployApplicationRepository.findBambooDeployApplication(COLLECTOR_ID, BAMBOO_URL, APP_ONE_ID))
                 .thenReturn(getExistingApp());
@@ -141,11 +144,23 @@ public class BambooDeployCollectorTaskTest {
         return configInfo;
     }
 
+    private Component getDashboardComponent() {
+        CollectorItem item = new CollectorItem();
+        item.setId(APP_ONE_OBJECT_ID);
+        Map<CollectorType, List<CollectorItem>> collItems = new HashMap<>();
+        collItems.put(CollectorType.Deployment, Arrays.asList(item));
+        Component component = new Component();
+        component.setCollectorItems(collItems);
+        return component;
+    }
+
     private BambooDeployApplication getExistingApp() {
         BambooDeployApplication app = new BambooDeployApplication();
         app.setInstanceUrl(BAMBOO_URL);
         app.setApplicationName("Super App");
         app.setApplicationId(APP_ONE_ID);
+        app.setId(APP_ONE_OBJECT_ID);
+        app.setCollectorId(COLLECTOR_ID);
         return app;
     }
 

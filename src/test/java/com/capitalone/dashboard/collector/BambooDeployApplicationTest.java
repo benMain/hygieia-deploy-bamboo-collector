@@ -1,6 +1,5 @@
 package com.capitalone.dashboard.collector;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.capitalone.dashboard.model.BambooDeployApplication;

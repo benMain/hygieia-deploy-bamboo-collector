@@ -72,7 +72,6 @@ public class BambooDeployCollectorTaskTest {
     private static ObjectId COLLECTOR_ID = new ObjectId();
     private static ObjectId APP_ONE_OBJECT_ID = new ObjectId();
     private static String DEV_ENV_ID = "10239438";
-    private static String PROD_ENV_ID = "899643";
 
     @Before
     public void init() {

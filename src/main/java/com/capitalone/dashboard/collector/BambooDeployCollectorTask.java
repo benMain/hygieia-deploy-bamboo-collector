@@ -303,43 +303,4 @@ public class BambooDeployCollectorTask extends CollectorTask<BambooDeployCollect
         }
         return "";
     }
-
-    @SuppressWarnings("unused")
-    private boolean changed(EnvironmentStatus status, EnvironmentStatus existing) {
-        return existing.isOnline() != status.isOnline();
-    }
-
-    @SuppressWarnings("unused")
-    private EnvironmentStatus findExistingStatus(final EnvironmentStatus proposed,
-            List<EnvironmentStatus> existingStatuses) {
-
-        return Iterables.tryFind(existingStatuses, new Predicate<EnvironmentStatus>() {
-            @Override
-            public boolean apply(EnvironmentStatus existing) {
-                return existing.getEnvironmentName().equals(proposed.getEnvironmentName())
-                        && existing.getComponentName().equals(proposed.getComponentName())
-                        && existing.getResourceName().equals(proposed.getResourceName());
-            }
-        }).orNull();
-    }
-
-    @SuppressWarnings("unused")
-    private boolean changed(EnvironmentComponent component, EnvironmentComponent existing) {
-        return existing.isDeployed() != component.isDeployed() || existing.getAsOfDate() != component.getAsOfDate()
-                || !existing.getComponentVersion().equalsIgnoreCase(component.getComponentVersion());
-    }
-
-    @SuppressWarnings("unused")
-    private EnvironmentComponent findExistingComponent(final EnvironmentComponent proposed,
-            List<EnvironmentComponent> existingComponents) {
-
-        return Iterables.tryFind(existingComponents, new Predicate<EnvironmentComponent>() {
-            @Override
-            public boolean apply(EnvironmentComponent existing) {
-                return existing.getEnvironmentName().equals(proposed.getEnvironmentName())
-                        && existing.getComponentName().equals(proposed.getComponentName());
-
-            }
-        }).orNull();
-    }
 }

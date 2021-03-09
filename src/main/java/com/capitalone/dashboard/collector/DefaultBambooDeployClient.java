@@ -122,28 +122,6 @@ public class DefaultBambooDeployClient implements BambooDeployClient {
         return data;
     }
 
-    public JSONObject getParentAgent(JSONObject childObject) {
-        JSONObject parentAgent = null;
-        String resourceType = null;
-        String hasAgent = null;
-
-        JSONObject parentObject = (JSONObject) childObject.get("parent");
-
-        if (parentObject != null) {
-            resourceType = str(parentObject, "type");
-            hasAgent = str(parentObject, "hasAgent");
-
-            if (resourceType != null && resourceType.equalsIgnoreCase("agent")) {
-                parentAgent = parentObject;
-            } else {
-                if ("true".equalsIgnoreCase(hasAgent)) {
-                    parentAgent = getParentAgent(parentObject);
-                }
-            }
-        }
-
-        return parentAgent;
-    }
     // ////// Helpers
 
     private Optional<BambooEnvironmentResults> makeEnvironmentRestCall(String instanceUrl, String endpoint) {

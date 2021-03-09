@@ -10,6 +10,7 @@ import com.capitalone.dashboard.repository.EnvironmentComponentRepository;
 import com.capitalone.dashboard.repository.EnvironmentStatusRepository;
 import com.capitalone.dashboard.model.BambooDeployApplication;
 import com.capitalone.dashboard.model.BambooDeployCollector;
+import com.capitalone.dashboard.model.BambooDeployEnvResCompData;
 import com.capitalone.dashboard.model.CollectorItem;
 import com.capitalone.dashboard.model.CollectorType;
 import com.capitalone.dashboard.model.Component;
@@ -71,6 +72,8 @@ public class BambooDeployCollectorTaskTest {
     private static String APP_TWO_ID = "456";
     private static ObjectId COLLECTOR_ID = new ObjectId();
     private static ObjectId APP_ONE_OBJECT_ID = new ObjectId();
+    private static String DEV_ENV_ID = "10239438";
+    private static String PROD_ENV_ID = "899643";
 
     @Before
     public void init() {
@@ -123,8 +126,24 @@ public class BambooDeployCollectorTaskTest {
         when(bambooDeployApplicationRepository.findBambooDeployApplication(COLLECTOR_ID, BAMBOO_URL, APP_TWO_ID))
                 .thenReturn(null);
         when(bambooDeployApplicationRepository.findEnabledApplications(COLLECTOR_ID, BAMBOO_URL))
-                .thenReturn(new ArrayList<BambooDeployApplication>());
+                .thenReturn(Arrays.asList(getExistingApp()));
+        when(bambooDeployClient.getEnvironments(Matchers.any(BambooDeployApplication.class)))
+                .thenReturn(getMockEnvironments());
+        when(bambooDeployClient.getEnvironmentResourceStatusData(Matchers.any(BambooDeployApplication.class),
+                Matchers.any(Environment.class))).thenReturn(getEnvStatus());
+
         collectorTask.collect(getCollector());
+        verify(dbComponentRepository, times(1)).findAll();
+        verify(bambooDeployApplicationRepository, times(2)).findByCollectorIdIn(Matchers.anyObject());
+        verify(bambooDeployClient, times(1)).getApplications(Matchers.any(String.class));
+        verify(bambooDeployApplicationRepository, times(1)).findBambooDeployApplication(COLLECTOR_ID, BAMBOO_URL,
+                APP_ONE_ID);
+        verify(bambooDeployApplicationRepository, times(1)).findBambooDeployApplication(COLLECTOR_ID, BAMBOO_URL,
+                APP_TWO_ID);
+        verify(bambooDeployApplicationRepository, times(1)).findEnabledApplications(COLLECTOR_ID, BAMBOO_URL);
+        verify(bambooDeployClient, times(1)).getEnvironments(Matchers.any(BambooDeployApplication.class));
+        verify(bambooDeployClient, times(1)).getEnvironmentResourceStatusData(
+                Matchers.any(BambooDeployApplication.class), Matchers.any(Environment.class));
     }
 
     private BambooDeployCollector getCollector() {
@@ -144,6 +163,19 @@ public class BambooDeployCollectorTaskTest {
         return configInfo;
     }
 
+    private List<BambooDeployEnvResCompData> getEnvStatus() {
+        BambooDeployEnvResCompData envStatus = new BambooDeployEnvResCompData();
+        envStatus.setEnvironmentName("dev");
+        envStatus.setCollectorItemId(APP_ONE_OBJECT_ID);
+        envStatus.setComponentVersion("v1.2");
+        envStatus.setAsOfDate(1615303834);
+        envStatus.setDeployed(true);
+        envStatus.setComponentName("CloudformationTemplate");
+        envStatus.setOnline(true);
+        envStatus.setResourceName("Super App");
+        return Arrays.asList(envStatus);
+    }
+
     private Component getDashboardComponent() {
         CollectorItem item = new CollectorItem();
         item.setId(APP_ONE_OBJECT_ID);
@@ -152,6 +184,13 @@ public class BambooDeployCollectorTaskTest {
         Component component = new Component();
         component.setCollectorItems(collItems);
         return component;
+    }
+
+    private List<Environment> getMockEnvironments() {
+        List<Environment> envs = new ArrayList<>();
+        Environment devEnv = new Environment(DEV_ENV_ID, "dev");
+        envs.add(devEnv);
+        return envs;
     }
 
     private BambooDeployApplication getExistingApp() {

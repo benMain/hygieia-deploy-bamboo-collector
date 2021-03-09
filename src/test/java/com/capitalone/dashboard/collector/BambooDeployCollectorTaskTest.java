@@ -164,6 +164,7 @@ public class BambooDeployCollectorTaskTest {
 
     private List<BambooDeployEnvResCompData> getEnvStatus() {
         BambooDeployEnvResCompData envStatus = new BambooDeployEnvResCompData();
+        envStatus.setComponentID("44480930382");
         envStatus.setEnvironmentName("dev");
         envStatus.setCollectorItemId(APP_ONE_OBJECT_ID);
         envStatus.setComponentVersion("v1.2");
@@ -172,6 +173,10 @@ public class BambooDeployCollectorTaskTest {
         envStatus.setComponentName("CloudformationTemplate");
         envStatus.setOnline(true);
         envStatus.setResourceName("Super App");
+        envStatus.setEnvironmentUrl("https://duh.com");
+        envStatus.getEnvironmentUrl();
+        envStatus.setParentAgentName("blah");
+        envStatus.getParentAgentName();
         return Arrays.asList(envStatus);
     }
 
@@ -188,6 +193,8 @@ public class BambooDeployCollectorTaskTest {
     private List<Environment> getMockEnvironments() {
         List<Environment> envs = new ArrayList<>();
         Environment devEnv = new Environment(DEV_ENV_ID, "dev");
+        devEnv.getId();
+        devEnv.getName();
         envs.add(devEnv);
         return envs;
     }

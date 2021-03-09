@@ -16,8 +16,6 @@ import com.capitalone.dashboard.repository.EnvironmentComponentRepository;
 import com.capitalone.dashboard.repository.EnvironmentStatusRepository;
 import com.capitalone.dashboard.repository.BambooDeployApplicationRepository;
 import com.capitalone.dashboard.repository.BambooDeployCollectorRepository;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
